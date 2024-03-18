@@ -1,12 +1,11 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 import uvicorn
 
-"""import version: 1"""
 from app.v1.endpoints.excel_endpoint import router as v1_excel_endpoint
 
-
 app = FastAPI()
-
+app.mount("/static", StaticFiles(directory=r"app\v1\static"), name="static")
 app.include_router(v1_excel_endpoint, prefix="/v1")
 
 if __name__ == '__main__':
